@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-11-04 21:28:34 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="my.pack.model.Address" table="ADDRESS">
+        <id name="idAddress" type="java.lang.Integer">
+            <column name="ID_ADDRESS" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="item" class="my.pack.model.Item" fetch="join">
+            <column name="ID_ITEM" />
+        </many-to-one>
+        <property name="line1" type="java.lang.String">
+            <column name="LINE1" />
+        </property>
+        <property name="line2" type="java.lang.String">
+            <column name="LINE2" />
+        </property>
+    </class>
+</hibernate-mapping>

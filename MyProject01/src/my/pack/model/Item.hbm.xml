@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-11-04 21:28:34 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="my.pack.model.Item" table="ITEM">
+        <id name="idItem" type="java.lang.Integer">
+            <column name="ID_ITEM" />
+            <generator class="assigned" />
+        </id>
+        <property name="firstName" type="java.lang.String">
+            <column name="FIRSTNAME" />
+        </property>
+        <property name="lastName" type="java.lang.String">
+            <column name="LASTNAME" />
+        </property>
+        <set name="phones" table="PHONE" inverse="false" lazy="true">
+            <key>
+                <column name="ID_ITEM" />
+            </key>
+            <one-to-many class="my.pack.model.Phone" />
+        </set>
+        <set name="addresses" table="ADDRESS" inverse="false" lazy="true">
+            <key>
+                <column name="ID_ITEM" />
+            </key>
+            <one-to-many class="my.pack.model.Address" />
+        </set>
+    </class>
+</hibernate-mapping>
