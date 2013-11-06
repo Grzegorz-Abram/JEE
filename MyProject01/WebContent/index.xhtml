@@ -14,20 +14,48 @@
 <h:body>
 	<h:dataTable value="#{itemBean.allItems}" var="item" border="1">
 		<h:column>
-			<f:facet name="header">First Name</f:facet>
+			<f:facet name="header">
+				<div>
+					First Name
+				</div>
+				<div>
+					<h:inputText></h:inputText>
+				</div>
+			</f:facet>
 			#{item.firstName}
 		</h:column>
 		<h:column>
-			<f:facet name="header">Last Name</f:facet>
+			<f:facet name="header">
+				<div>
+					Last Name
+				</div>
+				<div>
+					<h:inputText></h:inputText>
+				</div>
+			</f:facet>
 			#{item.lastName}
 		</h:column>
 		<h:column>
-			<f:facet name="header">Address</f:facet>
+			<f:facet name="header">
+				<div>
+					Address
+				</div>
+				<div>
+					<h:inputText></h:inputText>
+				</div>
+			</f:facet>
 			<ui:repeat var="address" value="#{item.addressesAsList}">#{address.line1}, #{address.line2} <br />
 			</ui:repeat>
 		</h:column>
 		<h:column>
-			<f:facet name="header">Phone</f:facet>
+			<f:facet name="header">
+				<div>
+					Phone
+				</div>
+				<div>
+					<h:inputText></h:inputText>
+				</div>
+			</f:facet>
 			<ui:repeat var="phone" value="#{item.phonesAsList}">
 				<h:outputText value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
 					escape="false"
