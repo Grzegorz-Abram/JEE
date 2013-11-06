@@ -5,11 +5,11 @@
 <hibernate-mapping>
     <class name="my.pack.model.Address" table="ADDRESS">
         <id name="idAddress" type="java.lang.Integer">
-            <column name="ID_ADDRESS" />
+            <column name="IDADDRESS" />
             <generator class="assigned" />
         </id>
         <many-to-one name="item" class="my.pack.model.Item" fetch="join">
-            <column name="ID_ITEM" />
+            <column name="IDITEM" />
         </many-to-one>
         <property name="line1" type="java.lang.String">
             <column name="LINE1" />

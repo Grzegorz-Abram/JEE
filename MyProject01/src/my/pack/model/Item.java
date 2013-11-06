@@ -44,7 +44,7 @@ public class Item implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id_item", unique = true, nullable = false)
+	@Column(name = "idItem", unique = true, nullable = false)
 	public Integer getIdItem() {
 		return this.idItem;
 	}

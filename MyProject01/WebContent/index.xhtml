@@ -13,17 +13,21 @@
 
 <h:body>
 	<h:dataTable value="#{itemBean.allItems}" var="item" border="1">
-		<h:column headerText="firstName">
+		<h:column>
+			<f:facet name="header">First Name</f:facet>
 			#{item.firstName}
 		</h:column>
-		<h:column headerText="lastName">
+		<h:column>
+			<f:facet name="header">Last Name</f:facet>
 			#{item.lastName}
 		</h:column>
-		<h:column headerText="addresses">
+		<h:column>
+			<f:facet name="header">Address</f:facet>
 			<ui:repeat var="address" value="#{item.addressesAsList}">#{address.line1}, #{address.line2} <br />
 			</ui:repeat>
 		</h:column>
-		<h:column headerText="phones">
+		<h:column>
+			<f:facet name="header">Phone</f:facet>
 			<ui:repeat var="phone" value="#{item.phonesAsList}">
 				<h:outputText value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
 					escape="false"

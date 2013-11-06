@@ -6,5 +6,5 @@
   <table-filter match-catalog="PHONEBOOK" match-schema="PUBLIC" match-name="ADDRESS"/>
   <table-filter match-catalog="PHONEBOOK" match-schema="PUBLIC" match-name="ITEM"/>
   <table-filter match-catalog="PHONEBOOK" match-schema="PUBLIC" match-name="PHONE"/>
-  <table-filter match-catalog="PHONEBOOK" match-schema="PUBLIC" match-name="USERS"/>
+  <table-filter match-catalog="PHONEBOOK" match-schema="PUBLIC" match-name="USER"/>
 </hibernate-reverse-engineering>

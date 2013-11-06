@@ -37,7 +37,7 @@ public class Phone implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id_phone", unique = true, nullable = false)
+	@Column(name = "idPhone", unique = true, nullable = false)
 	public Integer getIdPhone() {
 		return this.idPhone;
 	}
@@ -47,7 +47,7 @@ public class Phone implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_item")
+	@JoinColumn(name = "idItem")
 	public Item getItem() {
 		return this.item;
 	}

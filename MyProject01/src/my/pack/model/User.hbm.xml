@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2013-11-04 21:28:34 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-	<class name="my.pack.model.User" table="USERS">
+	<class name="my.pack.model.User" table="USER">
 		<id name="login" type="java.lang.String">
 			<column name="LOGIN" />
 			<generator class="assigned" />

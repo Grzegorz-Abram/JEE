@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="my.pack.model.Item" table="ITEM">
         <id name="idItem" type="java.lang.Integer">
-            <column name="ID_ITEM" />
+            <column name="IDITEM" />
             <generator class="assigned" />
         </id>
         <property name="firstName" type="java.lang.String">
@@ -16,13 +16,13 @@
         </property>
         <set name="phones" table="PHONE" inverse="false" lazy="true">
             <key>
-                <column name="ID_ITEM" />
+                <column name="IDITEM" />
             </key>
             <one-to-many class="my.pack.model.Phone" />
         </set>
         <set name="addresses" table="ADDRESS" inverse="false" lazy="true">
             <key>
-                <column name="ID_ITEM" />
+                <column name="IDITEM" />
             </key>
             <one-to-many class="my.pack.model.Address" />
         </set>
