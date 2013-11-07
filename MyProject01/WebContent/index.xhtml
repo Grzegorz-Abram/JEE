@@ -8,12 +8,15 @@
 	<title>Phonebook</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<link href="./resources/css/myTheme.css" rel="stylesheet"
 		type="text/css" />
 	<link href="./resources/css/defaultTheme.css" rel="stylesheet"
 		type="text/css" />
-	<link href="./resources/css/960.css" rel="stylesheet" type="text/css" />
+
+	<link href="./resources/css/pure.css" rel="stylesheet" type="text/css" />
+	<link href="./resources/css/main.css" rel="stylesheet" type="text/css" />
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
@@ -26,65 +29,92 @@
 </h:head>
 
 <h:body>
-	<div class="height400">
-		<h:dataTable value="#{itemBean.allItems}" var="item"
-			class="phonebookTable" id="phonebookTable" cellpadding="0"
-			cellspacing="0">
-			<h:column>
-				<f:facet name="header">
-					<div>First Name</div>
-					<div>
-						<h:inputText></h:inputText>
-					</div>
-				</f:facet>
+	<div class="content">
+		<div class="header">
+			<div
+				class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
+				<a class="pure-menu-heading" href="">Your Site</a>
+
+				<ul>
+					<li class="pure-menu-selected"><a href="#">Home</a></li>
+					<li><a href="#">Tour</a></li>
+					<li><a href="#">API</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">About</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+		<div class="content">
+			<div class="pure-g-r content-ribbon">
+				<div class="pure-u-1">
+					<div class="height400">
+						<h:dataTable value="#{itemBean.allItems}" var="item"
+							class="pure-table pure-table-bordered" id="phonebookTable">
+							<h:column>
+								<f:facet name="header">
+									<div>First Name</div>
+									<div>
+										<h:inputText></h:inputText>
+									</div>
+								</f:facet>
 				
 				#{item.firstName}
 				
 				<f:facet name="footer">First Name</f:facet>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<div>Last Name</div>
-					<div>
-						<h:inputText></h:inputText>
-					</div>
-				</f:facet>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<div>Last Name</div>
+									<div>
+										<h:inputText></h:inputText>
+									</div>
+								</f:facet>
 				
 				#{item.lastName}
 				
 				<f:facet name="footer">Last Name</f:facet>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<div>Address</div>
-					<div>
-						<h:inputText></h:inputText>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<div>Address</div>
+									<div>
+										<h:inputText></h:inputText>
+									</div>
+								</f:facet>
+
+								<ui:repeat var="address" value="#{item.addressesAsList}">#{address.line1}, #{address.line2} <br />
+								</ui:repeat>
+
+								<f:facet name="footer">Address</f:facet>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<div>Phone</div>
+									<div>
+										<h:inputText></h:inputText>
+									</div>
+								</f:facet>
+
+								<ui:repeat var="phone" value="#{item.phonesAsList}">
+									<h:outputText
+										value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
+										escape="false"
+										rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and logged == logged)}"
+										style="#{phone.restricted == true ? 'color:red' : ''}" />
+								</ui:repeat>
+
+								<f:facet name="footer">Phone</f:facet>
+							</h:column>
+						</h:dataTable>
 					</div>
-				</f:facet>
+				</div>
+			</div>
+		</div>
 
-				<ui:repeat var="address" value="#{item.addressesAsList}">#{address.line1}, #{address.line2} <br />
-				</ui:repeat>
-
-				<f:facet name="footer">Address</f:facet>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<div>Phone</div>
-					<div>
-						<h:inputText></h:inputText>
-					</div>
-				</f:facet>
-
-				<ui:repeat var="phone" value="#{item.phonesAsList}">
-					<h:outputText value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
-						escape="false"
-						rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and logged == logged)}"
-						style="#{phone.restricted == true ? 'color:red' : ''}" />
-				</ui:repeat>
-
-				<f:facet name="footer">Phone</f:facet>
-			</h:column>
-		</h:dataTable>
+		<div class="footer">View the source of this layout to learn
+			more. Made with love by the YUI Team.</div>
 	</div>
 </h:body>
 
