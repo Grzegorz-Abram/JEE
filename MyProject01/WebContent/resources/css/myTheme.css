@@ -1,0 +1,10 @@
+.height400 {
+	height: 400px;
+	overflow-x: auto;
+	overflow-y: auto;
+}
+
+.phonebookTable td,.phonebookTable th {
+	border: 1px solid #778899;
+	padding: 5px;
+}
