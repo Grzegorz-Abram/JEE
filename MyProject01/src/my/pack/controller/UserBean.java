@@ -35,4 +35,11 @@ public class UserBean {
 		return q.list();
 	}
 
+	public void login() {
+		this.user.setLogged(true);
+	}
+
+	public void logout() {
+		this.user.setLogged(false);
+	}
 }

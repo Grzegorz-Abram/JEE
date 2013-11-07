@@ -33,15 +33,19 @@
 		<div class="header">
 			<div
 				class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
-				<a class="pure-menu-heading" href="">Your Site</a>
-
-				<ul>
-					<li class="pure-menu-selected"><a href="#">Home</a></li>
-					<li><a href="#">Tour</a></li>
-					<li><a href="#">API</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">About</a></li>
-				</ul>
+				<h:form class="pure-form" rendered="#{not userBean.user.logged}">
+					<h:inputText value="#{userBean.user.login}" />
+					<h:inputSecret value="#{userBean.user.password}" />
+					<h:commandButton value="login" action="#{userBean.login()}"
+						class="pure-button" />
+					<h:commandButton value="register" action="register"
+						immediate="true" class="pure-button" />
+				</h:form>
+				<h:form class="pure-form" rendered="#{userBean.user.logged}">
+					<h:outputText value="Hello #{userBean.user.login}" />
+					<h:commandButton value="logout" action="#{userBean.logout()}"
+						class="pure-button" />
+				</h:form>
 			</div>
 		</div>
 
@@ -49,7 +53,7 @@
 		<div class="content">
 			<div class="pure-g-r content-ribbon">
 				<div class="pure-u-1">
-					<div class="height400">
+					<div class="height-limit">
 						<h:dataTable value="#{itemBean.allItems}" var="item"
 							class="pure-table pure-table-bordered" id="phonebookTable">
 							<h:column>
@@ -101,7 +105,7 @@
 									<h:outputText
 										value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
 										escape="false"
-										rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and logged == logged)}"
+										rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
 										style="#{phone.restricted == true ? 'color:red' : ''}" />
 								</ui:repeat>
 
@@ -113,8 +117,7 @@
 			</div>
 		</div>
 
-		<div class="footer">View the source of this layout to learn
-			more. Made with love by the YUI Team.</div>
+		<div class="footer">Phonebook created by GregoR</div>
 	</div>
 </h:body>
 

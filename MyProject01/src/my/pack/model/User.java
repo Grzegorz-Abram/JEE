@@ -18,6 +18,7 @@ public class User implements java.io.Serializable {
 	private String password;
 	private String name;
 	private String surname;
+	private boolean logged;
 
 	public User() {
 	}
@@ -71,4 +72,11 @@ public class User implements java.io.Serializable {
 		this.surname = surname;
 	}
 
+	public boolean isLogged() {
+		return this.logged;
+	}
+
+	public void setLogged(Boolean logged) {
+		this.logged = logged;
+	}
 }
