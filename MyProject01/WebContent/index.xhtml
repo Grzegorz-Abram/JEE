@@ -24,7 +24,25 @@
 	<script>
 			$(document).ready(function() {
 				$('#phonebookTable').fixedHeaderTable({ footer: true });
+
+				$(".filterinput input").each(function(index, input) {
+				    var onkeydown = input.onkeydown;
+				    input.onkeydown = null;
+				
+				    $(input).on("keydown", function(event) {
+				        delay(function() { onkeydown.call(input, event); }, 500);
+				    });
+				});
 			});
+
+			var delay = (function() {
+			    var timer = 0;
+
+			    return function(callback, timeout) {
+			        clearTimeout(timer);
+			        timer = setTimeout(callback, timeout);
+			    };
+			})(); 
     </script>
 </h:head>
 
@@ -53,66 +71,77 @@
 		<div class="content">
 			<div class="pure-g-r content-ribbon">
 				<div class="pure-u-1">
-					<div class="height-limit">
-						<h:dataTable value="#{itemBean.allItems}" var="item"
-							class="pure-table pure-table-bordered" id="phonebookTable">
-							<h:column>
-								<f:facet name="header">
-									<div>First Name</div>
-									<div>
-										<h:inputText></h:inputText>
-									</div>
-								</f:facet>
+					<h:panelGroup id="mylist" binding="#{myListComponent}">
+						<div class="height-limit">
+
+							<h:dataTable
+								value="#{itemBean.getItemsByFirstName(filterBean.firstNameFilter)}"
+								var="item" class="pure-table pure-table-bordered"
+								id="phonebookTable">
+								<h:column>
+									<f:facet name="header">
+										<div>First Name</div>
+										<div>
+											<h:form>
+												<h:inputText id="name" value="#{filterBean.firstNameFilter}"
+													class="filterinput">
+													<f:ajax event="keydown" execute="name"
+														render=":#{myListComponent.clientId}" />
+												</h:inputText>
+											</h:form>
+										</div>
+									</f:facet>
 				
 				#{item.firstName}
 				
 				<f:facet name="footer">First Name</f:facet>
-							</h:column>
-							<h:column>
-								<f:facet name="header">
-									<div>Last Name</div>
-									<div>
-										<h:inputText></h:inputText>
-									</div>
-								</f:facet>
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<div>Last Name</div>
+										<div>
+											<h:inputText></h:inputText>
+										</div>
+									</f:facet>
 				
 				#{item.lastName}
 				
 				<f:facet name="footer">Last Name</f:facet>
-							</h:column>
-							<h:column>
-								<f:facet name="header">
-									<div>Address</div>
-									<div>
-										<h:inputText></h:inputText>
-									</div>
-								</f:facet>
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<div>Address</div>
+										<div>
+											<h:inputText></h:inputText>
+										</div>
+									</f:facet>
 
-								<ui:repeat var="address" value="#{item.addressesAsList}">#{address.line1}, #{address.line2} <br />
-								</ui:repeat>
+									<ui:repeat var="address" value="#{item.addressesAsList}">#{address.line1}, #{address.line2} <br />
+									</ui:repeat>
 
-								<f:facet name="footer">Address</f:facet>
-							</h:column>
-							<h:column>
-								<f:facet name="header">
-									<div>Phone</div>
-									<div>
-										<h:inputText></h:inputText>
-									</div>
-								</f:facet>
+									<f:facet name="footer">Address</f:facet>
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<div>Phone</div>
+										<div>
+											<h:inputText></h:inputText>
+										</div>
+									</f:facet>
 
-								<ui:repeat var="phone" value="#{item.phonesAsList}">
-									<h:outputText
-										value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
-										escape="false"
-										rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
-										style="#{phone.restricted == true ? 'color:red' : ''}" />
-								</ui:repeat>
+									<ui:repeat var="phone" value="#{item.phonesAsList}">
+										<h:outputText
+											value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
+											escape="false"
+											rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
+											style="#{phone.restricted == true ? 'color:red' : ''}" />
+									</ui:repeat>
 
-								<f:facet name="footer">Phone</f:facet>
-							</h:column>
-						</h:dataTable>
-					</div>
+									<f:facet name="footer">Phone</f:facet>
+								</h:column>
+							</h:dataTable>
+						</div>
+					</h:panelGroup>
 				</div>
 			</div>
 		</div>

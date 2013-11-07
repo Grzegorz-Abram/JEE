@@ -41,4 +41,28 @@ public class ItemBean {
 
 		return q.list();
 	}
+
+	public List<Item> getItemsByFirstName(String firstName) {
+
+		Transaction transaction = session.beginTransaction();
+
+		Query q = session.createQuery("from Item i where i.firstName like '"
+				+ firstName + "%'");
+
+		transaction.commit();
+
+		return q.list();
+	}
+
+	public List<Item> getItemsByLastName(String lastName) {
+
+		Transaction transaction = session.beginTransaction();
+
+		Query q = session.createQuery("from Item i where i.lastName like '"
+				+ lastName + "%'");
+
+		transaction.commit();
+
+		return q.list();
+	}
 }
