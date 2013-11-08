@@ -36,74 +36,65 @@
 		</div>
 
 		<div class="content">
-			<div class="pure-g-r content-ribbon">
+			<div class="pure-g content-ribbon">
 				<div class="pure-u-1">
-					<h:form>
-						<table class="pure-table pure-table-bordered">
-							<thead>
-								<tr>
-									<th>
-										<div>First Name</div>
-										<div>
-											<h:inputText value="#{filterBean.firstName}">
-												<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
-											</h:inputText>
-										</div>
-									</th>
-									<th>
-										<div>Last Name</div>
-										<div>
-											<h:inputText value="#{filterBean.lastName}">
-												<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
-											</h:inputText>
-										</div>
-									</th>
-									<th>
-										<div>Address</div>
-										<div>
-											<h:inputText value="#{filterBean.address}">
-												<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
-											</h:inputText>
-										</div>
-									</th>
-									<th>
-										<div>Phone</div>
-										<div>
-											<h:inputText value="#{filterBean.phone}">
-												<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
-											</h:inputText>
-										</div>
-									</th>
-								</tr>
-							</thead>
-						</table>
-					</h:form>
+					<div class="pure-g">
+						<div class="pure-u-1-4">
+							<h:form class="pure-form pure-form-stacked">
+									First Name
+									<h:inputText value="#{filterBean.firstName}">
+									<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
+								</h:inputText>
+							</h:form>
+						</div>
+						<div class="pure-u-1-4">
+							<h:form class="pure-form pure-form-stacked">
+									Last Name
+									<h:inputText value="#{filterBean.lastName}">
+									<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
+								</h:inputText>
+							</h:form>
+						</div>
+						<div class="pure-u-1-4">
+							<h:form class="pure-form pure-form-stacked">
+									Address
+									<h:inputText value="#{filterBean.address}">
+									<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
+								</h:inputText>
+							</h:form>
+						</div>
+						<div class="pure-u-1-4">
+							<h:form class="pure-form pure-form-stacked">
+									Phone
+									<h:inputText value="#{filterBean.phone}">
+									<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
+								</h:inputText>
+							</h:form>
+						</div>
+					</div>
 
 					<h:panelGroup id="mylist" binding="#{myListComponent}">
-						<h:dataTable
-							value="#{itemBean.getItemsWithFilter(filterBean.firstName, filterBean.lastName, filterBean.address, filterBean.phone)}"
-							var="item" class="pure-table pure-table-bordered"
-							id="phonebookTableBody">
-							<h:column>
-									#{item.firstName}
-								</h:column>
-							<h:column>
-									#{item.lastName}
-								</h:column>
-							<h:column>
-								<ui:repeat var="address" value="#{item.addressesAsList}">#{address.line1}, #{address.line2} <br />
-								</ui:repeat>
-							</h:column>
-							<h:column>
-								<ui:repeat var="phone" value="#{item.phonesAsList}">
-									<h:outputText
-										value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
-										escape="false"
-										rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
-										style="#{phone.restricted == true ? 'color:red' : ''}" />
-								</ui:repeat>
-							</h:column>
-						</h:dataTable>
+						<div class="pure-g">
+							<ui:repeat var="item"
+								value="#{itemBean.getItemsWithFilter(filterBean.firstName, filterBean.lastName, filterBean.address, filterBean.phone)}">
+								<div class="pure-u-1-4">#{item.firstName}</div>
+								<div class="pure-u-1-4">#{item.lastName}</div>
+								<div class="pure-u-1-4">
+									<ui:repeat var="address" value="#{item.addressesAsList}">
+									#{address.line1}, #{address.line2} <br />
+									</ui:repeat>
+								</div>
+								<div class="pure-u-1-4">
+									<ui:repeat var="phone" value="#{item.phonesAsList}">
+										<h:outputText
+											value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
+											escape="false"
+											rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
+											style="#{phone.restricted == true ? 'color:red' : ''}" />
+									</ui:repeat>
+								</div>
+							</ui:repeat>
+						</div>
 					</h:panelGroup>
 				</div>
 			</div>
