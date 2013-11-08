@@ -1616,6 +1616,7 @@ this the same font stack that Normalize.css sets for the `body`.
     border-left-width: 0;
 }
 
+.pure-table-head,
 .pure-table thead {
     background: #e0e0e0;
     color: #000;
@@ -1631,6 +1632,7 @@ striping:
 .pure-table td {
     background-color: transparent;
 }
+.pure-table-row,
 .pure-table-odd td {
     background-color: #f2f2f2;
 }
