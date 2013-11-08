@@ -54,12 +54,20 @@ public class ItemBean {
 		return q.list();
 	}
 
-	public List<Item> getItemsByLastName(String lastName) {
+	public List<Item> getItemsWithFilter(String firstName, String lastName,
+			String address, String phone) {
 
 		Transaction transaction = session.beginTransaction();
 
-		Query q = session.createQuery("from Item i where i.lastName like '"
-				+ lastName + "%'");
+		// select distinct i.firstName, i.lastName, a.line1, a.line2, p.phone, p.comment
+		Query q = session.createQuery(" select distinct i from Item i "
+				+ " left outer join i.addresses a "
+				+ " left outer join i.phones p where i.firstName like '"
+				+ firstName + "%' and i.lastName like '" + lastName
+				+ "%' and (coalesce(a.line1, '') like '" + address
+				+ "%' or coalesce(a.line2, '') like '" + address + "%') "
+				+ " and (coalesce(p.phone, '') like '" + phone + "%' "
+				+ " or coalesce(p.comment, '') like '" + phone + "%')");
 
 		transaction.commit();
 

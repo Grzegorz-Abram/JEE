@@ -10,40 +10,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<link href="./resources/css/myTheme.css" rel="stylesheet"
-		type="text/css" />
-	<link href="./resources/css/defaultTheme.css" rel="stylesheet"
-		type="text/css" />
-
 	<link href="./resources/css/pure.css" rel="stylesheet" type="text/css" />
 	<link href="./resources/css/main.css" rel="stylesheet" type="text/css" />
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-	<script src="./resources/js/jquery.fixedheadertable.js"></script>
-	<script>
-			$(document).ready(function() {
-				$('#phonebookTable').fixedHeaderTable({ footer: true });
-
-				$(".filterinput input").each(function(index, input) {
-				    var onkeydown = input.onkeydown;
-				    input.onkeydown = null;
-				
-				    $(input).on("keydown", function(event) {
-				        delay(function() { onkeydown.call(input, event); }, 500);
-				    });
-				});
-			});
-
-			var delay = (function() {
-			    var timer = 0;
-
-			    return function(callback, timeout) {
-			        clearTimeout(timer);
-			        timer = setTimeout(callback, timeout);
-			    };
-			})(); 
-    </script>
 </h:head>
 
 <h:body>
@@ -67,80 +35,75 @@
 			</div>
 		</div>
 
-
 		<div class="content">
 			<div class="pure-g-r content-ribbon">
 				<div class="pure-u-1">
-					<h:panelGroup id="mylist" binding="#{myListComponent}">
-						<div class="height-limit">
-
-							<h:dataTable
-								value="#{itemBean.getItemsByFirstName(filterBean.firstNameFilter)}"
-								var="item" class="pure-table pure-table-bordered"
-								id="phonebookTable">
-								<h:column>
-									<f:facet name="header">
+					<h:form>
+						<table class="pure-table pure-table-bordered">
+							<thead>
+								<tr>
+									<th>
 										<div>First Name</div>
 										<div>
-											<h:form>
-												<h:inputText id="name" value="#{filterBean.firstNameFilter}"
-													class="filterinput">
-													<f:ajax event="keydown" execute="name"
-														render=":#{myListComponent.clientId}" />
-												</h:inputText>
-											</h:form>
+											<h:inputText value="#{filterBean.firstName}">
+												<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
+											</h:inputText>
 										</div>
-									</f:facet>
-				
-				#{item.firstName}
-				
-				<f:facet name="footer">First Name</f:facet>
-								</h:column>
-								<h:column>
-									<f:facet name="header">
+									</th>
+									<th>
 										<div>Last Name</div>
 										<div>
-											<h:inputText></h:inputText>
+											<h:inputText value="#{filterBean.lastName}">
+												<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
+											</h:inputText>
 										</div>
-									</f:facet>
-				
-				#{item.lastName}
-				
-				<f:facet name="footer">Last Name</f:facet>
-								</h:column>
-								<h:column>
-									<f:facet name="header">
+									</th>
+									<th>
 										<div>Address</div>
 										<div>
-											<h:inputText></h:inputText>
+											<h:inputText value="#{filterBean.address}">
+												<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
+											</h:inputText>
 										</div>
-									</f:facet>
-
-									<ui:repeat var="address" value="#{item.addressesAsList}">#{address.line1}, #{address.line2} <br />
-									</ui:repeat>
-
-									<f:facet name="footer">Address</f:facet>
-								</h:column>
-								<h:column>
-									<f:facet name="header">
+									</th>
+									<th>
 										<div>Phone</div>
 										<div>
-											<h:inputText></h:inputText>
+											<h:inputText value="#{filterBean.phone}">
+												<f:ajax event="keyup" render=":#{myListComponent.clientId}" />
+											</h:inputText>
 										</div>
-									</f:facet>
+									</th>
+								</tr>
+							</thead>
+						</table>
+					</h:form>
 
-									<ui:repeat var="phone" value="#{item.phonesAsList}">
-										<h:outputText
-											value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
-											escape="false"
-											rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
-											style="#{phone.restricted == true ? 'color:red' : ''}" />
-									</ui:repeat>
-
-									<f:facet name="footer">Phone</f:facet>
+					<h:panelGroup id="mylist" binding="#{myListComponent}">
+						<h:dataTable
+							value="#{itemBean.getItemsWithFilter(filterBean.firstName, filterBean.lastName, filterBean.address, filterBean.phone)}"
+							var="item" class="pure-table pure-table-bordered"
+							id="phonebookTableBody">
+							<h:column>
+									#{item.firstName}
 								</h:column>
-							</h:dataTable>
-						</div>
+							<h:column>
+									#{item.lastName}
+								</h:column>
+							<h:column>
+								<ui:repeat var="address" value="#{item.addressesAsList}">#{address.line1}, #{address.line2} <br />
+								</ui:repeat>
+							</h:column>
+							<h:column>
+								<ui:repeat var="phone" value="#{item.phonesAsList}">
+									<h:outputText
+										value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
+										escape="false"
+										rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
+										style="#{phone.restricted == true ? 'color:red' : ''}" />
+								</ui:repeat>
+							</h:column>
+						</h:dataTable>
 					</h:panelGroup>
 				</div>
 			</div>

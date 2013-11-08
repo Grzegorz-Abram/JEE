@@ -7,22 +7,40 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class FilterBean {
 
-	private String firstNameFilter;
-	private String lastNameFilter;
+	private String firstName;
+	private String lastName;
+	private String address;
+	private String phone;
 
-	public String getFirstNameFilter() {
-		return firstNameFilter;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirstNameFilter(String firstNameFilter) {
-		this.firstNameFilter = firstNameFilter;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLastNameFilter() {
-		return lastNameFilter;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLastNameFilter(String lastNameFilter) {
-		this.lastNameFilter = lastNameFilter;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }
