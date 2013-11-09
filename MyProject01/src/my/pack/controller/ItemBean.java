@@ -55,11 +55,16 @@ public class ItemBean {
 	}
 
 	public List<Item> getItemsWithFilter(String firstName, String lastName,
-			String address, String phone) {
+			String address, String phone, String orderColumn) {
 
 		Transaction transaction = session.beginTransaction();
 
-		// select distinct i.firstName, i.lastName, a.line1, a.line2, p.phone, p.comment
+		if (orderColumn == null || orderColumn.isEmpty()) {
+			orderColumn = "i.lastName";
+		}
+
+		// select distinct i.firstName, i.lastName, a.line1, a.line2, p.phone,
+		// p.comment
 		Query q = session.createQuery(" select distinct i from Item i "
 				+ " left outer join i.addresses a "
 				+ " left outer join i.phones p where i.firstName like '"
@@ -67,7 +72,8 @@ public class ItemBean {
 				+ "%' and (coalesce(a.line1, '') like '" + address
 				+ "%' or coalesce(a.line2, '') like '" + address + "%') "
 				+ " and (coalesce(p.phone, '') like '" + phone + "%' "
-				+ " or coalesce(p.comment, '') like '" + phone + "%')");
+				+ " or coalesce(p.comment, '') like '" + phone
+				+ "%') order by " + orderColumn);
 
 		transaction.commit();
 

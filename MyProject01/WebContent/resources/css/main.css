@@ -86,3 +86,6 @@ body .primary-button {
     font-size: 80%;
 }
 
+.round-border {
+    border-radius: 5px;
+}
