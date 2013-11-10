@@ -1,82 +1,59 @@
 package my.pack.controller;
 
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 
 import my.pack.model.Item;
-import my.pack.util.HibernateUtil;
+import my.pack.util.HibernateHelper;
 
 @ManagedBean(name = "itemBean")
 @SessionScoped
 public class ItemBean {
-
-	private Session session = null;
-	private Item item = new Item();
+	private HibernateHelper helper;
+	private DataModel<Item> items;
+	private Item selectedItem;
+	private int selectedItemIndex;
+	private String firstName;
+	private String lastName;
+	private String address;
+	private String phone;
+	private String orderColumn;
 
 	public ItemBean() {
-		session = HibernateUtil.getSessionFactory().openSession();
+		helper = new HibernateHelper();
+		this.firstName = "";
+		this.lastName = "";
+		this.address = "";
+		this.phone = "";
+		this.orderColumn = "i.lastName desc";
 	}
 
-	public Item getItem() {
-		return item;
+	public ItemBean(String firstName, String lastName, String address,
+			String phone, String orderColumn) {
+		helper = new HibernateHelper();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.phone = phone;
+		this.orderColumn = orderColumn;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
-	}
-
-	public List<Item> getAllItems() {
-
-		Transaction transaction = session.beginTransaction();
-
-		Query q = session.createQuery("from Item");
-
-		transaction.commit();
-
-		return q.list();
-	}
-
-	public List<Item> getItemsByFirstName(String firstName) {
-
-		Transaction transaction = session.beginTransaction();
-
-		Query q = session.createQuery("from Item i where i.firstName like '"
-				+ firstName + "%'");
-
-		transaction.commit();
-
-		return q.list();
-	}
-
-	public List<Item> getItemsWithFilter(String firstName, String lastName,
-			String address, String phone, String orderColumn) {
-
-		Transaction transaction = session.beginTransaction();
-
-		if (orderColumn == null || orderColumn.isEmpty()) {
-			orderColumn = "i.lastName";
+	public Item getSelectedItem() {
+		if (selectedItem == null) {
+			selectedItem = new Item();
+			selectedItemIndex = -1;
 		}
+		return selectedItem;
+	}
 
-		// select distinct i.firstName, i.lastName, a.line1, a.line2, p.phone,
-		// p.comment
-		Query q = session.createQuery(" select distinct i from Item i "
-				+ " left outer join i.addresses a "
-				+ " left outer join i.phones p where i.firstName like '"
-				+ firstName + "%' and i.lastName like '" + lastName
-				+ "%' and (coalesce(a.line1, '') like '" + address
-				+ "%' or coalesce(a.line2, '') like '" + address + "%') "
-				+ " and (coalesce(p.phone, '') like '" + phone + "%' "
-				+ " or coalesce(p.comment, '') like '" + phone
-				+ "%') order by " + orderColumn);
-
-		transaction.commit();
-
-		return q.list();
+	public DataModel<Item> getItemsWithFilter(String firstName,
+			String lastName, String address, String phone, String orderColumn) {
+		// if (items == null) {
+		items = new ListDataModel<Item>(helper.getItemsWithFilter(firstName,
+				lastName, address, phone, orderColumn));
+		// }
+		return items;
 	}
 }
