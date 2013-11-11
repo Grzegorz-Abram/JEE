@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	<h:outputText value="#{itemBean.selectedItem.firstName}" title="Title" />
+	<h:outputText value="#{itemBean.selectedItem.lastName}" title="Title" />
+	<ui:repeat var="address"
+		value="#{itemBean.selectedItem.addressesAsList}">
+		#{address.line1}, #{address.line2} <br />
+	</ui:repeat>
+	<ui:repeat var="phone" value="#{itemBean.selectedItem.phonesAsList}">
+		<h:outputText value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
+			escape="false"
+			rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
+			style="#{phone.restricted == true ? 'color:red' : ''}" />
+	</ui:repeat>
+</body>
+</html>

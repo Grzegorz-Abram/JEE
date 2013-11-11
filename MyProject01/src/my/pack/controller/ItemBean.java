@@ -56,4 +56,11 @@ public class ItemBean {
 		// }
 		return items;
 	}
+
+	public String edit(String firstName, String lastName, String address,
+			String phone, String orderColumn) {
+		selectedItem = (Item) getItemsWithFilter(firstName, lastName, address,
+				phone, orderColumn).getRowData();
+		return "edit";
+	}
 }

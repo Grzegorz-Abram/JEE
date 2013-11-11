@@ -88,26 +88,32 @@
 					</div>
 
 					<h:panelGroup id="mylist" binding="#{myListComponent}">
-						<ui:repeat var="item"
-							value="#{itemBean.getItemsWithFilter(filterBean.firstName, filterBean.lastName, filterBean.address, filterBean.phone, orderBean.orderColumn)}">
-							<div class="pure-g pure-table pure-table-row round-border">
-								<div class="pure-u-1-4">#{item.firstName}</div>
-								<div class="pure-u-1-4">#{item.lastName}</div>
-								<div class="pure-u-1-4">
-									<ui:repeat var="address" value="#{item.addressesAsList}">
+						<h:form>
+							<ui:repeat var="item"
+								value="#{itemBean.getItemsWithFilter(filterBean.firstName, filterBean.lastName, filterBean.address, filterBean.phone, orderBean.orderColumn)}">
+								<div class="pure-g pure-table pure-table-row round-border">
+									<div class="pure-u-1-4">
+										<h:commandLink action="#{itemBean.edit(filterBean.firstName, filterBean.lastName, filterBean.address, filterBean.phone, orderBean.orderColumn)}"
+											value="#{item.firstName}" />
+									</div>
+									<div class="pure-u-1-4">#{item.lastName}</div>
+									<div class="pure-u-1-4">
+										<ui:repeat var="address" value="#{item.addressesAsList}">
 											#{address.line1}, #{address.line2} <br />
 										</ui:repeat>
+									</div>
+									<div class="pure-u-1-4">
+										<ui:repeat var="phone" value="#{item.phonesAsList}">
+											<h:outputText
+												value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
+												escape="false"
+												rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
+												style="#{phone.restricted == true ? 'color:red' : ''}" />
+										</ui:repeat>
+									</div>
 								</div>
-								<div class="pure-u-1-4">
-									<ui:repeat var="phone" value="#{item.phonesAsList}">
-										<h:outputText value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
-											escape="false"
-											rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
-											style="#{phone.restricted == true ? 'color:red' : ''}" />
-									</ui:repeat>
-								</div>
-							</div>
-						</ui:repeat>
+							</ui:repeat>
+						</h:form>
 					</h:panelGroup>
 				</div>
 			</div>
