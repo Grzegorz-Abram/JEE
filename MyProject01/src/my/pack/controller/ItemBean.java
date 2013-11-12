@@ -59,8 +59,7 @@ public class ItemBean {
 
 	public String edit(String firstName, String lastName, String address,
 			String phone, String orderColumn) {
-		selectedItem = (Item) getItemsWithFilter(firstName, lastName, address,
-				phone, orderColumn).getRowData();
+		selectedItem = (Item) items.getRowData();
 		return "edit";
 	}
 }
