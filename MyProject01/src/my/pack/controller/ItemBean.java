@@ -16,11 +16,6 @@ public class ItemBean {
 	private DataModel<Item> items;
 	private Item selectedItem;
 	private int selectedItemIndex;
-	private String firstName;
-	private String lastName;
-	private String address;
-	private String phone;
-	private String orderColumn;
 
 	@ManagedProperty(value = "#{filterBean}")
 	private FilterBean filterBean;
@@ -38,21 +33,6 @@ public class ItemBean {
 
 	public ItemBean() {
 		helper = new HibernateHelper();
-		this.firstName = "";
-		this.lastName = "";
-		this.address = "";
-		this.phone = "";
-		this.orderColumn = "i.lastName desc";
-	}
-
-	public ItemBean(String firstName, String lastName, String address,
-			String phone, String orderColumn) {
-		helper = new HibernateHelper();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.phone = phone;
-		this.orderColumn = orderColumn;
 	}
 
 	public Item getSelectedItem() {
@@ -63,17 +43,12 @@ public class ItemBean {
 		return selectedItem;
 	}
 
-	public DataModel<Item> getItemsWithFilter(String firstName,
-			String lastName, String address, String phone, String orderColumn) {
-		firstName = filterBean.getFirstName();
-		lastName = filterBean.getLastName();
-		address = filterBean.getAddress();
-		phone = filterBean.getPhone();
-		orderColumn = orderBean.getOrderColumn();
-
+	public DataModel<Item> getItems() {
 		// if (items == null) {
-		items = new ListDataModel<Item>(helper.getItemsWithFilter(firstName,
-				lastName, address, phone, orderColumn));
+		items = new ListDataModel<Item>(helper.getItemsWithFilter(
+				filterBean.getFirstName(), filterBean.getLastName(),
+				filterBean.getAddress(), filterBean.getPhone(),
+				orderBean.getOrderColumn()));
 		// }
 
 		return items;

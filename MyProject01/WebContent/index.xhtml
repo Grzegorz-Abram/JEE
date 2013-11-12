@@ -89,8 +89,7 @@
 
 					<h:panelGroup id="mylist" binding="#{myListComponent}">
 						<h:form>
-							<ui:repeat var="item"
-								value="#{itemBean.getItemsWithFilter(filterBean.firstName, filterBean.lastName, filterBean.address, filterBean.phone, orderBean.orderColumn)}">
+							<ui:repeat var="item" value="#{itemBean.items}">
 								<div class="pure-g pure-table pure-table-row round-border">
 									<div class="pure-u-1-4">
 										<h:commandLink action="#{itemBean.edit}"
