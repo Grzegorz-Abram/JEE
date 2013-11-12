@@ -12,7 +12,7 @@ public class HibernateHelper {
 	Session session = null;
 
 	public HibernateHelper() {
-		//this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+		// this.session = HibernateUtil.getSessionFactory().getCurrentSession();
 		this.session = HibernateUtil.getSessionFactory().openSession();
 	}
 

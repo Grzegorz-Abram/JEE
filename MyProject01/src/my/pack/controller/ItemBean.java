@@ -15,7 +15,6 @@ public class ItemBean {
 	private HibernateHelper helper;
 	private DataModel<Item> items;
 	private Item selectedItem;
-	private int selectedItemIndex;
 
 	@ManagedProperty(value = "#{filterBean}")
 	private FilterBean filterBean;
@@ -36,11 +35,7 @@ public class ItemBean {
 	}
 
 	public Item getSelectedItem() {
-		if (selectedItem == null) {
-			selectedItem = new Item();
-			selectedItemIndex = -1;
-		}
-		return selectedItem;
+		return this.selectedItem;
 	}
 
 	public DataModel<Item> getItems() {
