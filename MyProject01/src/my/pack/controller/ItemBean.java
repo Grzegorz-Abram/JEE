@@ -40,7 +40,7 @@ public class ItemBean {
 
 	public DataModel<Item> getItems() {
 		// if (items == null) {
-		items = new ListDataModel<Item>(helper.getItemsWithFilter(
+		items = new ListDataModel<Item>(helper.getItems(
 				filterBean.getFirstName(), filterBean.getLastName(),
 				filterBean.getAddress(), filterBean.getPhone(),
 				orderBean.getOrderColumn()));

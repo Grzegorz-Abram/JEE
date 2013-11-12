@@ -16,7 +16,7 @@ public class HibernateHelper {
 		this.session = HibernateUtil.getSessionFactory().openSession();
 	}
 
-	public List<Item> getItemsWithFilter(String firstName, String lastName,
+	public List<Item> getItems(String firstName, String lastName,
 			String address, String phone, String orderColumn) {
 		List<Item> itemList = null;
 
@@ -40,6 +40,7 @@ public class HibernateHelper {
 					+ " or coalesce(p.comment, '') like '" + phone
 					+ "%') order by " + orderColumn);
 			itemList = (List<Item>) query.list();
+
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
