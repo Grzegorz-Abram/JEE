@@ -93,7 +93,7 @@
 								value="#{itemBean.getItemsWithFilter(filterBean.firstName, filterBean.lastName, filterBean.address, filterBean.phone, orderBean.orderColumn)}">
 								<div class="pure-g pure-table pure-table-row round-border">
 									<div class="pure-u-1-4">
-										<h:commandLink action="#{itemBean.edit(filterBean.firstName, filterBean.lastName, filterBean.address, filterBean.phone, orderBean.orderColumn)}"
+										<h:commandLink action="#{itemBean.edit}"
 											value="#{item.firstName}" />
 									</div>
 									<div class="pure-u-1-4">#{item.lastName}</div>

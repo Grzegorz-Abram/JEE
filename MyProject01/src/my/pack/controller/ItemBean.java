@@ -57,8 +57,7 @@ public class ItemBean {
 		return items;
 	}
 
-	public String edit(String firstName, String lastName, String address,
-			String phone, String orderColumn) {
+	public String edit() {
 		selectedItem = (Item) items.getRowData();
 		return "edit";
 	}
