@@ -1,6 +1,7 @@
 package my.pack.controller;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -20,6 +21,20 @@ public class ItemBean {
 	private String address;
 	private String phone;
 	private String orderColumn;
+
+	@ManagedProperty(value = "#{filterBean}")
+	private FilterBean filterBean;
+
+	public void setFilterBean(FilterBean filterBean) {
+		this.filterBean = filterBean;
+	}
+
+	@ManagedProperty(value = "#{orderBean}")
+	private OrderBean orderBean;
+
+	public void setOrderBean(OrderBean orderBean) {
+		this.orderBean = orderBean;
+	}
 
 	public ItemBean() {
 		helper = new HibernateHelper();
@@ -50,10 +65,17 @@ public class ItemBean {
 
 	public DataModel<Item> getItemsWithFilter(String firstName,
 			String lastName, String address, String phone, String orderColumn) {
+		firstName = filterBean.getFirstName();
+		lastName = filterBean.getLastName();
+		address = filterBean.getAddress();
+		phone = filterBean.getPhone();
+		orderColumn = orderBean.getOrderColumn();
+
 		// if (items == null) {
 		items = new ListDataModel<Item>(helper.getItemsWithFilter(firstName,
 				lastName, address, phone, orderColumn));
 		// }
+
 		return items;
 	}
 

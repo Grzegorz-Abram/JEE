@@ -7,10 +7,10 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class FilterBean {
 
-	private String firstName;
-	private String lastName;
-	private String address;
-	private String phone;
+	private String firstName = "";
+	private String lastName = "";
+	private String address = "";
+	private String phone = "";
 
 	public String getFirstName() {
 		return firstName;
