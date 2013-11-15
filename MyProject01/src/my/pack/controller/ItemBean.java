@@ -53,4 +53,25 @@ public class ItemBean {
 		selectedItem = (Item) items.getRowData();
 		return "edit";
 	}
+
+	public String save() {
+		return "index";
+	}
+
+	public String add() {
+		selectedItem = new Item();
+		return "edit";
+	}
+
+	public String delete() {
+		return null;
+	}
+
+	public String addPhone() {
+		return null;
+	}
+
+	public String deletePhone() {
+		return null;
+	}
 }
