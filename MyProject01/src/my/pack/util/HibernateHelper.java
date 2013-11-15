@@ -27,9 +27,6 @@ public class HibernateHelper {
 				orderColumn = "i.lastName";
 			}
 
-			// select distinct i.firstName, i.lastName, a.line1, a.line2,
-			// p.phone,
-			// p.comment
 			Query query = session.createQuery(" select distinct i from Item i "
 					+ " left outer join i.addresses a "
 					+ " left outer join i.phones p where i.firstName like '"
@@ -47,5 +44,52 @@ public class HibernateHelper {
 		}
 
 		return itemList;
+	}
+
+	public void deleteItem(Item item) {
+		Transaction tx = null;
+		String hqlDelete = "";
+		int deletedEntities = -1;
+
+		try {
+			tx = session.beginTransaction();
+
+			hqlDelete = "delete Address a where a.item.idItem = :idItem";
+			deletedEntities = session.createQuery(hqlDelete)
+					.setInteger("idItem", item.getIdItem()).executeUpdate();
+
+			hqlDelete = "delete Phone p where p.item.idItem = :idItem";
+			deletedEntities = session.createQuery(hqlDelete)
+					.setInteger("idItem", item.getIdItem()).executeUpdate();
+
+			hqlDelete = "delete Item i where i.idItem = :idItem";
+			deletedEntities = session.createQuery(hqlDelete)
+					.setInteger("idItem", item.getIdItem()).executeUpdate();
+
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+	}
+
+	public void saveItem(Item item) {
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+
+			String hqlUpdate = "update Item i set i.firstName = :firstName, i.lastName = :lastName where i.idItem = :idItem";
+
+			int updatedEntities = session.createQuery(hqlUpdate)
+					.setString("firstName", item.getFirstName())
+					.setString("lastName", item.getLastName())
+					.setInteger("idItem", item.getIdItem()).executeUpdate();
+
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
 	}
 }

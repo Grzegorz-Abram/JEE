@@ -49,21 +49,24 @@ public class ItemBean {
 		return items;
 	}
 
+	public String add() {
+		selectedItem = new Item();
+		return "edit";
+	}
+
 	public String edit() {
 		selectedItem = (Item) items.getRowData();
 		return "edit";
 	}
 
 	public String save() {
+		helper.saveItem(selectedItem);
 		return "index";
 	}
 
-	public String add() {
-		selectedItem = new Item();
-		return "edit";
-	}
-
 	public String delete() {
+		selectedItem = (Item) items.getRowData();
+		helper.deleteItem(selectedItem);
 		return null;
 	}
 
