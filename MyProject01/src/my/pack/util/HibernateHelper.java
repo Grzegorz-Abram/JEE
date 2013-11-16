@@ -48,23 +48,11 @@ public class HibernateHelper {
 
 	public void deleteItem(Item item) {
 		Transaction tx = null;
-		String hqlDelete = "";
-		int deletedEntities = -1;
 
 		try {
 			tx = session.beginTransaction();
 
-			hqlDelete = "delete Address a where a.item.idItem = :idItem";
-			deletedEntities = session.createQuery(hqlDelete)
-					.setInteger("idItem", item.getIdItem()).executeUpdate();
-
-			hqlDelete = "delete Phone p where p.item.idItem = :idItem";
-			deletedEntities = session.createQuery(hqlDelete)
-					.setInteger("idItem", item.getIdItem()).executeUpdate();
-
-			hqlDelete = "delete Item i where i.idItem = :idItem";
-			deletedEntities = session.createQuery(hqlDelete)
-					.setInteger("idItem", item.getIdItem()).executeUpdate();
+			session.delete(item);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -79,12 +67,7 @@ public class HibernateHelper {
 		try {
 			tx = session.beginTransaction();
 
-			String hqlUpdate = "update Item i set i.firstName = :firstName, i.lastName = :lastName where i.idItem = :idItem";
-
-			int updatedEntities = session.createQuery(hqlUpdate)
-					.setString("firstName", item.getFirstName())
-					.setString("lastName", item.getLastName())
-					.setInteger("idItem", item.getIdItem()).executeUpdate();
+			session.save(item);
 
 			tx.commit();
 		} catch (Exception e) {
