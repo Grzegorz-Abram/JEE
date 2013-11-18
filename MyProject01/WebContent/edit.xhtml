@@ -15,92 +15,96 @@
 </h:head>
 
 <body>
-	<h:form class="pure-form pure-form-stacked">
-		<fieldset>
-			<legend>First Name</legend>
-			<div class="pure-g">
-				<div class="pure-u-1">
-					<h:inputText value="#{itemBean.selectedItem.firstName}" />
-				</div>
-			</div>
-		</fieldset>
-
-		<fieldset>
-			<legend>Last Name</legend>
-			<div class="pure-g">
-				<div class="pure-u-1">
-					<h:inputText value="#{itemBean.selectedItem.lastName}" />
-				</div>
-			</div>
-		</fieldset>
-
-		<fieldset>
-			<legend>Address</legend>
-			<div class="pure-g">
-				<ui:repeat var="address"
-					value="#{itemBean.selectedItem.addressesAsList}">
-					<div class="pure-u-1-3">
-						<label>Street</label>
-						<h:inputText value="#{address.line1}" />
-					</div>
-					<div class="pure-u-1-3">
-						<label>City</label>
-						<h:inputText value="#{address.line2}" />
-					</div>
-					<div class="pure-u-1-3"></div>
-				</ui:repeat>
-			</div>
-		</fieldset>
-
-		<fieldset>
-			<h:panelGroup id="mylist" binding="#{myListPhones}">
-				<legend>Phone</legend>
-
+	<h:panelGroup id="editForm" binding="#{editForm}">
+		<h:form class="pure-form pure-form-stacked">
+			<fieldset>
+				<legend>First Name</legend>
 				<div class="pure-g">
-					<div class="pure-u-1-3">
-						<label>Phone</label>
+					<div class="pure-u-1">
+						<h:inputText value="#{itemBean.selectedItem.firstName}" />
 					</div>
-					<div class="pure-u-1-3">
-						<label>Comment</label>
-					</div>
-					<div class="pure-u-1-3"></div>
+				</div>
+			</fieldset>
 
-					<ui:repeat var="phone"
-						value="#{itemBean.selectedItem.phonesAsList}">
+			<fieldset>
+				<legend>Last Name</legend>
+				<div class="pure-g">
+					<div class="pure-u-1">
+						<h:inputText value="#{itemBean.selectedItem.lastName}" />
+					</div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend>Address</legend>
+				<div class="pure-g">
+					<ui:repeat var="address"
+						value="#{itemBean.selectedItem.addressesAsList}">
 						<div class="pure-u-1-3">
-							<h:inputText value="#{phone.phone}"
-								rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}" />
+							<label>Street</label>
+							<h:inputText value="#{address.line1}" />
 						</div>
 						<div class="pure-u-1-3">
-							<h:inputText value="#{phone.comment}"
-								rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}" />
+							<label>City</label>
+							<h:inputText value="#{address.line2}" />
+						</div>
+						<div class="pure-u-1-3"></div>
+					</ui:repeat>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<h:panelGroup id="mylist" binding="#{myListPhones}">
+					<legend>Phone</legend>
+
+					<div class="pure-g">
+						<div class="pure-u-1-3">
+							<label>Phone</label>
 						</div>
 						<div class="pure-u-1-3">
-							<h:commandButton action="#{itemBean.deletePhone(phone.idPhone)}"
-								value="Delete" styleClass="pure-button">
-								<f:ajax render=":#{myListPhones.clientId}" />
+							<label>Comment</label>
+						</div>
+						<div class="pure-u-1-3"></div>
+
+						<ui:repeat var="phone"
+							value="#{itemBean.selectedItem.phonesAsList}">
+							<div class="pure-u-1-3">
+								<h:inputText value="#{phone.phone}"
+									rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}" />
+							</div>
+							<div class="pure-u-1-3">
+								<h:inputText value="#{phone.comment}"
+									rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}" />
+							</div>
+							<div class="pure-u-1-3">
+								<h:commandButton action="#{itemBean.deletePhone(phone.idPhone)}"
+									value="Delete" styleClass="pure-button">
+									<f:ajax render=":#{myListPhones.clientId}"
+										execute=":#{editForm.clientId}" />
+								</h:commandButton>
+							</div>
+						</ui:repeat>
+
+						<div class="pure-u-1-3">
+							<h:commandButton action="#{itemBean.addPhone}" value="Add"
+								styleClass="pure-button">
+								<f:ajax render=":#{myListPhones.clientId}"
+									execute=":#{editForm.clientId}" />
 							</h:commandButton>
 						</div>
-					</ui:repeat>
+					</div>
+				</h:panelGroup>
+			</fieldset>
 
-					<div class="pure-u-1-3">
-						<h:commandButton action="#{itemBean.addPhone}" value="Add"
-							styleClass="pure-button">
-							<f:ajax render=":#{myListPhones.clientId}" />
-						</h:commandButton>
+			<fieldset>
+				<div class="pure-g">
+					<div class="pure-u-1">
+						<h:commandButton action="#{itemBean.save}" value="Save"
+							styleClass="pure-button pure-button-primary" />
 					</div>
 				</div>
-			</h:panelGroup>
-		</fieldset>
-
-		<fieldset>
-			<div class="pure-g">
-				<div class="pure-u-1">
-					<h:commandButton action="#{itemBean.save}" value="Save"
-						styleClass="pure-button pure-button-primary" />
-				</div>
-			</div>
-		</fieldset>
-	</h:form>
+			</fieldset>
+		</h:form>
+	</h:panelGroup>
 </body>
 </html>

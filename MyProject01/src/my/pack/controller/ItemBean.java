@@ -72,6 +72,8 @@ public class ItemBean {
 	}
 
 	public String addPhone() {
+		helper.saveItem(selectedItem);
+
 		Phone phone = new Phone();
 		phone.setItem(selectedItem);
 		selectedItem.getPhones().add(phone);
@@ -80,6 +82,8 @@ public class ItemBean {
 	}
 
 	public String deletePhone(int idPhone) {
+		helper.saveItem(selectedItem);
+
 		Phone phone = new Phone();
 		for (Phone phoneTemp : selectedItem.getPhones()) {
 			if (phoneTemp.getIdPhone() == idPhone) {
