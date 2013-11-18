@@ -3,6 +3,7 @@ package my.pack.util;
 import java.util.List;
 
 import my.pack.model.Item;
+import my.pack.model.Phone;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -68,6 +69,36 @@ public class HibernateHelper {
 			tx = session.beginTransaction();
 
 			session.save(item);
+
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+	}
+
+	public void savePhone(Phone phone) {
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+
+			session.save(phone);
+
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+	}
+
+	public void deletePhone(Phone phone) {
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+
+			session.delete(phone);
 
 			tx.commit();
 		} catch (Exception e) {
