@@ -65,6 +65,10 @@ public class ItemBean {
 		return "index";
 	}
 
+	public String cancel() {
+		return "index";
+	}
+
 	public String delete() {
 		selectedItem = (Item) items.getRowData();
 		helper.deleteItem(selectedItem);
