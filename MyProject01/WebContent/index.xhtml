@@ -39,7 +39,7 @@
 			<div class="pure-g content-ribbon">
 				<div class="pure-u-1">
 					<div class="pure-g pure-table pure-table-head round-border">
-						<div class="pure-u-1-4">
+						<div class="pure-u-1-5">
 							<p>
 								<h:form class="pure-form pure-form-stacked">
 									<h:commandLink value="First Name"
@@ -52,7 +52,7 @@
 								</h:form>
 							</p>
 						</div>
-						<div class="pure-u-1-4">
+						<div class="pure-u-1-5">
 							<p>
 								<h:form class="pure-form pure-form-stacked">
 									<h:commandLink value="Last Name"
@@ -65,7 +65,7 @@
 								</h:form>
 							</p>
 						</div>
-						<div class="pure-u-1-4">
+						<div class="pure-u-1-5">
 							<p>
 								<h:form class="pure-form pure-form-stacked">
 									<strong>Address</strong>
@@ -75,7 +75,7 @@
 								</h:form>
 							</p>
 						</div>
-						<div class="pure-u-1-4">
+						<div class="pure-u-1-5">
 							<p>
 								<h:form class="pure-form pure-form-stacked">
 									<strong>Phone</strong>
@@ -85,23 +85,28 @@
 								</h:form>
 							</p>
 						</div>
+						<div class="pure-u-1-5">
+							<p>
+								<h:form class="pure-form pure-form-stacked">
+									<h:commandButton action="#{itemBean.add}" value="Add"
+										styleClass="pure-button" />
+								</h:form>
+							</p>
+						</div>
 					</div>
 
 					<h:panelGroup id="mylist" binding="#{myListComponent}">
 						<h:form>
 							<ui:repeat var="item" value="#{itemBean.items}">
 								<div class="pure-g pure-table pure-table-row round-border">
-									<div class="pure-u-1-4">
-										<h:commandLink action="#{itemBean.edit}"
-											value="#{item.firstName}" />
-									</div>
-									<div class="pure-u-1-4">#{item.lastName}</div>
-									<div class="pure-u-1-4">
+									<div class="pure-u-1-5">#{item.firstName}</div>
+									<div class="pure-u-1-5">#{item.lastName}</div>
+									<div class="pure-u-1-5">
 										<ui:repeat var="address" value="#{item.addressesAsList}">
 											#{address.line1}, #{address.line2} <br />
 										</ui:repeat>
 									</div>
-									<div class="pure-u-1-4">
+									<div class="pure-u-1-5">
 										<ui:repeat var="phone" value="#{item.phonesAsList}">
 											<h:outputText
 												value="#{phone.phone} #{phone.comment} &lt;br/&gt;"
@@ -109,6 +114,12 @@
 												rendered="#{phone.restricted != 'true' or (phone.restricted == 'true' and userBean.user.logged)}"
 												style="#{phone.restricted == true ? 'color:red' : ''}" />
 										</ui:repeat>
+									</div>
+									<div class="pure-u-1-5">
+										<h:commandButton action="#{itemBean.edit}" value="Edit"
+											styleClass="pure-button" />
+										<h:commandButton action="#{itemBean.delete}" value="Delete"
+											styleClass="pure-button" />
 									</div>
 								</div>
 							</ui:repeat>

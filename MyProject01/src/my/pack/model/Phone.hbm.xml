@@ -3,22 +3,24 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2013-11-04 21:28:34 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="my.pack.model.Phone" table="PHONE">
-        <id name="idPhone" type="java.lang.Integer">
-            <column name="IDPHONE" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="item" class="my.pack.model.Item" fetch="join">
-            <column name="IDITEM" />
-        </many-to-one>
-        <property name="phone" type="java.lang.String">
-            <column name="PHONE" />
-        </property>
-        <property name="comment" type="java.lang.String">
-            <column name="COMMENT" />
-        </property>
-        <property name="restricted" type="java.lang.String">
-            <column name="RESTRICTED" />
-        </property>
-    </class>
+	<class name="my.pack.model.Phone" table="PHONE">
+		<id name="idPhone" type="java.lang.Integer">
+			<column name="IDPHONE" />
+			<generator class="sequence">
+				<param name="sequence">PHONE_SEQ</param>
+			</generator>
+		</id>
+		<many-to-one name="item" class="my.pack.model.Item" fetch="join">
+			<column name="IDITEM" />
+		</many-to-one>
+		<property name="phone" type="java.lang.String">
+			<column name="PHONE" />
+		</property>
+		<property name="comment" type="java.lang.String">
+			<column name="COMMENT" />
+		</property>
+		<property name="restricted" type="java.lang.String">
+			<column name="RESTRICTED" />
+		</property>
+	</class>
 </hibernate-mapping>

@@ -7,6 +7,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 import my.pack.model.Item;
+import my.pack.model.Phone;
 import my.pack.util.HibernateHelper;
 
 @ManagedBean(name = "itemBean")
@@ -49,8 +50,53 @@ public class ItemBean {
 		return items;
 	}
 
+	public String add() {
+		selectedItem = new Item();
+		return "edit";
+	}
+
 	public String edit() {
 		selectedItem = (Item) items.getRowData();
 		return "edit";
+	}
+
+	public String save() {
+		helper.saveItem(selectedItem);
+		return "index";
+	}
+
+	public String cancel() {
+		return "index";
+	}
+
+	public String delete() {
+		selectedItem = (Item) items.getRowData();
+		helper.deleteItem(selectedItem);
+		return null;
+	}
+
+	public String addPhone() {
+		helper.saveItem(selectedItem);
+
+		Phone phone = new Phone();
+		phone.setItem(selectedItem);
+		selectedItem.getPhones().add(phone);
+		helper.savePhone(phone);
+		return null;
+	}
+
+	public String deletePhone(int idPhone) {
+		helper.saveItem(selectedItem);
+
+		Phone phone = new Phone();
+		for (Phone phoneTemp : selectedItem.getPhones()) {
+			if (phoneTemp.getIdPhone() == idPhone) {
+				phone = phoneTemp;
+				break;
+			}
+		}
+		selectedItem.getPhones().remove(phone);
+		helper.deletePhone(phone);
+		return null;
 	}
 }

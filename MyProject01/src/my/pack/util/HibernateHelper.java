@@ -3,6 +3,7 @@ package my.pack.util;
 import java.util.List;
 
 import my.pack.model.Item;
+import my.pack.model.Phone;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -27,9 +28,6 @@ public class HibernateHelper {
 				orderColumn = "i.lastName";
 			}
 
-			// select distinct i.firstName, i.lastName, a.line1, a.line2,
-			// p.phone,
-			// p.comment
 			Query query = session.createQuery(" select distinct i from Item i "
 					+ " left outer join i.addresses a "
 					+ " left outer join i.phones p where i.firstName like '"
@@ -47,5 +45,65 @@ public class HibernateHelper {
 		}
 
 		return itemList;
+	}
+
+	public void deleteItem(Item item) {
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+
+			session.delete(item);
+
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+	}
+
+	public void saveItem(Item item) {
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+
+			session.save(item);
+
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+	}
+
+	public void savePhone(Phone phone) {
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+
+			session.save(phone);
+
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+	}
+
+	public void deletePhone(Phone phone) {
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+
+			session.delete(phone);
+
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
 	}
 }

@@ -3,19 +3,21 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2013-11-04 21:28:34 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="my.pack.model.Address" table="ADDRESS">
-        <id name="idAddress" type="java.lang.Integer">
-            <column name="IDADDRESS" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="item" class="my.pack.model.Item" fetch="join">
-            <column name="IDITEM" />
-        </many-to-one>
-        <property name="line1" type="java.lang.String">
-            <column name="LINE1" />
-        </property>
-        <property name="line2" type="java.lang.String">
-            <column name="LINE2" />
-        </property>
-    </class>
+	<class name="my.pack.model.Address" table="ADDRESS">
+		<id name="idAddress" type="java.lang.Integer">
+			<column name="IDADDRESS" />
+			<generator class="sequence">
+				<param name="sequence">ADDRESS_SEQ</param>
+			</generator>
+		</id>
+		<many-to-one name="item" class="my.pack.model.Item" fetch="join">
+			<column name="IDITEM" />
+		</many-to-one>
+		<property name="line1" type="java.lang.String">
+			<column name="LINE1" />
+		</property>
+		<property name="line2" type="java.lang.String">
+			<column name="LINE2" />
+		</property>
+	</class>
 </hibernate-mapping>
