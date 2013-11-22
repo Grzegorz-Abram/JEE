@@ -9,23 +9,47 @@
 </h:head>
 
 <h:body>
-	<h:dataTable var="employee" value="#{employeeBean.listEmployees()}">
-		<h:column>
-			<f:facet name="header">id</f:facet>
-			<h:outputText value="#{employee.id}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">firstName</f:facet>
-			<h:outputText value="#{employee.firstName}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">lastName</f:facet>
-			<h:outputText value="#{employee.lastName}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">salary</f:facet>
-			<h:outputText value="#{employee.salary}" />
-		</h:column>
-	</h:dataTable>
+	<h:form>
+		<h:dataTable var="employee" value="#{employeeBean.listEmployees()}">
+			<h:column>
+				<f:facet name="header">id</f:facet>
+				<h:outputText value="#{employee.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">firstName</f:facet>
+				<h:inputText value="#{employee.firstName}"
+					rendered="#{employee.editable}" />
+				<h:outputText value="#{employee.firstName}"
+					rendered="#{not employee.editable}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">lastName</f:facet>
+				<h:inputText value="#{employee.lastName}"
+					rendered="#{employee.editable}" />
+				<h:outputText value="#{employee.lastName}"
+					rendered="#{not employee.editable}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">salary</f:facet>
+				<h:inputText value="#{employee.salary}"
+					rendered="#{employee.editable}" />
+				<h:outputText value="#{employee.salary}"
+					rendered="#{not employee.editable}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header"></f:facet>
+				<h:commandLink value="Edit"
+					action="#{employeeBean.editAction(employee)}"
+					rendered="#{not employee.editable}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header"></f:facet>
+				<h:commandLink action="#{employeeBean.deleteEmployee(employee.id)}"
+					value="delete" />
+			</h:column>
+		</h:dataTable>
+		<h:commandLink action="#{employeeBean.addEmployee('','','')}"
+			value="add" />
+	</h:form>
 </h:body>
 </html>

@@ -37,6 +37,11 @@ public class EmployeeBean {
 		this.employee = employee;
 	}
 
+	public String editAction(Employee employee) {
+		employee.setEditable(true);
+		return null;
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<Employee> listEmployees() {
 		List<Employee> employees = new ArrayList<Employee>();
@@ -79,12 +84,15 @@ public class EmployeeBean {
 		return id;
 	}
 
-	public void updateSalary(Integer id, int salary) {
+	public void updateEmployee(Integer id, String firstName, String lastName,
+			int salary) {
 		Session session = factory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
 			Employee employee = (Employee) session.get(Employee.class, id);
+			employee.setFirstName(firstName);
+			employee.setLastName(lastName);
 			employee.setSalary(salary);
 			session.update(employee);
 			tx.commit();
