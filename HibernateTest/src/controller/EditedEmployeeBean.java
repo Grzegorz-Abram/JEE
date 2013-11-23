@@ -32,6 +32,12 @@ public class EditedEmployeeBean {
 		return employees;
 	}
 
+	public String addEmployee() {
+		this.employee = new Employee();
+
+		return "edit";
+	}
+
 	public String startEdit(Employee employee) {
 		this.employee = employee;
 
@@ -60,7 +66,11 @@ public class EditedEmployeeBean {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.update(employee);
+			if (employee.getId() > 0) {
+				session.update(employee);
+			} else {
+				session.save(employee);
+			}
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

@@ -62,27 +62,6 @@ public class EmployeeBean {
 		return employees;
 	}
 
-	public Integer addEmployee() {
-		Integer id = null;
-
-		Session session = factory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			Employee employee = new Employee();
-			id = (Integer) session.save(employee);
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-
-		return id;
-	}
-
 	public void deleteEmployee(Employee employee) {
 		Session session = factory.openSession();
 		Transaction tx = null;
