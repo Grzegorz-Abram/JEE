@@ -5,7 +5,6 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private int salary;
-	private boolean editable;
 
 	public Employee() {
 	}
@@ -46,13 +45,5 @@ public class Employee {
 
 	public void setSalary(int salary) {
 		this.salary = salary;
-	}
-
-	public boolean isEditable() {
-		return editable;
-	}
-
-	public void setEditable(boolean editable) {
-		this.editable = editable;
 	}
 }

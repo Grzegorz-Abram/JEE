@@ -29,17 +29,16 @@ public class EmployeeBean {
 		}
 	}
 
+	public SessionFactory getFactory() {
+		return factory;
+	}
+
 	public Employee getEmployee() {
 		return employee;
 	}
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}
-
-	public String editAction(Employee employee) {
-		employee.setEditable(true);
-		return null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -63,14 +62,14 @@ public class EmployeeBean {
 		return employees;
 	}
 
-	public Integer addEmployee(String firstName, String lastName, int salary) {
+	public Integer addEmployee() {
 		Integer id = null;
 
 		Session session = factory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Employee employee = new Employee(firstName, lastName, salary);
+			Employee employee = new Employee();
 			id = (Integer) session.save(employee);
 			tx.commit();
 		} catch (HibernateException e) {
@@ -84,33 +83,11 @@ public class EmployeeBean {
 		return id;
 	}
 
-	public void updateEmployee(Integer id, String firstName, String lastName,
-			int salary) {
+	public void deleteEmployee(Employee employee) {
 		Session session = factory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Employee employee = (Employee) session.get(Employee.class, id);
-			employee.setFirstName(firstName);
-			employee.setLastName(lastName);
-			employee.setSalary(salary);
-			session.update(employee);
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-	}
-
-	public void deleteEmployee(Integer id) {
-		Session session = factory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			Employee employee = (Employee) session.get(Employee.class, id);
 			session.delete(employee);
 			tx.commit();
 		} catch (HibernateException e) {

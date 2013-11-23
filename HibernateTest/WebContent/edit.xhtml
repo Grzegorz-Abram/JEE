@@ -10,35 +10,34 @@
 
 <h:body>
 	<h:form>
-		<h:dataTable var="employee" value="#{employeeBean.listEmployees()}">
+		<h:dataTable var="employee"
+			value="#{editedEmployeeBean.employeeAsList}">
 			<h:column>
 				<f:facet name="header">id</f:facet>
 				<h:outputText value="#{employee.id}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">firstName</f:facet>
-				<h:outputText value="#{employee.firstName}" />
+				<h:inputText value="#{employee.firstName}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">lastName</f:facet>
-				<h:outputText value="#{employee.lastName}" />
+				<h:inputText value="#{employee.lastName}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">salary</f:facet>
-				<h:outputText value="#{employee.salary}" />
+				<h:inputText value="#{employee.salary}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header"></f:facet>
-				<h:commandLink value="Edit"
-					action="#{editedEmployeeBean.startEdit(employee)}" />
+				<h:commandLink value="Save" action="#{editedEmployeeBean.save()}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header"></f:facet>
-				<h:commandLink action="#{employeeBean.deleteEmployee(employee)}"
-					value="delete" />
+				<h:commandLink value="Cancel"
+					action="#{editedEmployeeBean.cancel()}" />
 			</h:column>
 		</h:dataTable>
-		<h:commandLink action="#{employeeBean.addEmployee()}" value="add" />
 	</h:form>
 </h:body>
 </html>
