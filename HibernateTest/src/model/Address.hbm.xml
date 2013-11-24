@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="model.Address" table="ADDRESS">
+		<id name="idAddress" type="int">
+			<column name="IDADDRESS" />
+			<generator class="native" />
+		</id>
+		<property name="idItem" type="int">
+			<column name="IDITEM" />
+		</property>
+		<property name="line1" type="java.lang.String">
+			<column name="LINE1" />
+		</property>
+		<property name="line2" type="java.lang.String">
+			<column name="LINE2" />
+		</property>
+	</class>
+</hibernate-mapping>

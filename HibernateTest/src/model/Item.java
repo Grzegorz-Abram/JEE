@@ -1,26 +1,24 @@
 package model;
 
-public class Employee {
-	private int id;
+public class Item {
+	private int idItem;
 	private String firstName;
 	private String lastName;
-	private int salary;
 
-	public Employee() {
+	public Item() {
 	}
 
-	public Employee(String firstName, String lastName, int salary) {
+	public Item(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.salary = salary;
 	}
 
-	public int getId() {
-		return this.id;
+	public int getIdItem() {
+		return this.idItem;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdItem(int idItem) {
+		this.idItem = idItem;
 	}
 
 	public String getFirstName() {
@@ -37,13 +35,5 @@ public class Employee {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public int getSalary() {
-		return this.salary;
-	}
-
-	public void setSalary(int salary) {
-		this.salary = salary;
 	}
 }
