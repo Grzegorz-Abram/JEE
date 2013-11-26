@@ -3,11 +3,13 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="model.Address" table="ADDRESS">
-		<id name="idAddress" type="int">
+		<id name="idAddress" type="java.lang.Integer">
 			<column name="IDADDRESS" />
-			<generator class="native" />
+			<generator class="sequence">
+				<param name="sequence">ADDRESS_SEQ</param>
+			</generator>
 		</id>
-		<property name="idItem" type="int">
+		<property name="idItem" type="java.lang.Integer">
 			<column name="IDITEM" />
 		</property>
 		<property name="line1" type="java.lang.String">

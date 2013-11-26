@@ -16,48 +16,40 @@
 			<div class="pure-u-1">
 				<h:form class="pure-form pure-form-stacked">
 					<div class="pure-g pure-table pure-table-head round-border">
-						<div class="pure-u-1-6 cell">
-							<h:outputText value="id" />
+						<div class="pure-u-1-5 cell">
+							<h:outputText value="idItem" />
 						</div>
-						<div class="pure-u-1-6 cell">
+						<div class="pure-u-1-5 cell">
 							<h:outputText value="firstName" />
 						</div>
-						<div class="pure-u-1-6 cell">
+						<div class="pure-u-1-5 cell">
 							<h:outputText value="lastName" />
 						</div>
-						<div class="pure-u-1-6 cell">
-							<h:outputText value="salary" />
-						</div>
-						<div class="pure-u-1-6 cell">
+						<div class="pure-u-1-5 cell">
 							<h:outputText value="" />
 						</div>
-						<div class="pure-u-1-6">
+						<div class="pure-u-1-5">
 							<h:outputText value="" />
 						</div>
 					</div>
 
-					<ui:repeat var="employee"
-						value="#{editedEmployeeBean.employeeAsList}">
+					<ui:repeat var="item" value="#{editedItemBean.itemAsList}">
 						<div class="pure-g pure-table pure-table-row round-border">
-							<div class="pure-u-1-6 cell">
-								<h:outputText value="#{employee.id}" />
+							<div class="pure-u-1-5 cell">
+								<h:outputText value="#{item.idItem}" />
 							</div>
-							<div class="pure-u-1-6 cell">
-								<h:inputText value="#{employee.firstName}" />
+							<div class="pure-u-1-5 cell">
+								<h:inputText value="#{item.firstName}" />
 							</div>
-							<div class="pure-u-1-6 cell">
-								<h:inputText value="#{employee.lastName}" />
+							<div class="pure-u-1-5 cell">
+								<h:inputText value="#{item.lastName}" />
 							</div>
-							<div class="pure-u-1-6 cell">
-								<h:inputText value="#{employee.salary}" />
+							<div class="pure-u-1-5 cell">
+								<h:commandLink value="Save" action="#{editedItemBean.save()}" />
 							</div>
-							<div class="pure-u-1-6 cell">
-								<h:commandLink value="Save"
-									action="#{editedEmployeeBean.save()}" />
-							</div>
-							<div class="pure-u-1-6">
+							<div class="pure-u-1-5">
 								<h:commandLink value="Cancel"
-									action="#{editedEmployeeBean.cancel()}" />
+									action="#{editedItemBean.cancel()}" />
 							</div>
 						</div>
 					</ui:repeat>

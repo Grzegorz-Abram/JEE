@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="model.Employee" table="EMPLOYEE">
-		<id name="id" type="int">
+		<id name="id" type="java.lang.Integer">
 			<column name="ID" />
 			<generator class="native" />
 		</id>
@@ -13,7 +13,7 @@
 		<property name="lastName" type="java.lang.String">
 			<column name="LAST_NAME" />
 		</property>
-		<property name="salary" type="int">
+		<property name="salary" type="java.lang.Integer">
 			<column name="SALARY" />
 		</property>
 	</class>
