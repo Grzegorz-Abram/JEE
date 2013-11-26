@@ -12,6 +12,28 @@ import org.junit.Test;
 public class JavaTest {
 
 	@Test
+	public void testCountDuplicates() {
+		Java java = new Java();
+
+		assertArrayEquals(
+				new List[] { java.stringToList("1"), java.stringToList("6") },
+				java.countDuplicates(java.stringToList("1,1,1,1,1,1")));
+		assertArrayEquals(
+				new List[] { java.stringToList("1,2"), java.stringToList("2,3") },
+				java.countDuplicates(java.stringToList("1,1,2,2,2")));
+		assertArrayEquals(
+				new List[] { java.stringToList("1,3,4,5"),
+						java.stringToList("2,3,1,2") },
+				java.countDuplicates(java.stringToList("1,1,3,3,3,4,5,5")));
+		assertArrayEquals(
+				new List[] { java.stringToList(""), java.stringToList("") },
+				java.countDuplicates(new ArrayList<Integer>()));
+		assertArrayEquals(
+				new List[] { java.stringToList(""), java.stringToList("") },
+				java.countDuplicates(null));
+	}
+
+	@Test
 	public void testListToArray() {
 		Java java = new Java();
 		List<Integer> list = java.stringToList("1,2,3,4,5");

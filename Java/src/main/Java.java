@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -10,10 +9,47 @@ public class Java {
 	public static void main(String[] args) {
 		Java java = new Java();
 		List<Integer> list, sortedList;
+		List<Integer>[] duplicatesList;
 
 		list = java.generateIntList(20, 10);
 		sortedList = java.sort(list);
 		java.printIntList(sortedList);
+
+		System.out.println();
+
+		duplicatesList = java.countDuplicates(sortedList);
+		java.printIntList(duplicatesList[0]);
+		System.out.println();
+		java.printIntList(duplicatesList[1]);
+	}
+
+	public List<Integer>[] countDuplicates(List<Integer> list) {
+		List<Integer> duplicatesList = new ArrayList<Integer>();
+		List<Integer> counter = new ArrayList<Integer>();
+		int previous;
+
+		try {
+			duplicatesList.add(list.get(0));
+			previous = list.get(0);
+			counter.add(1);
+
+			for (int i = 1; i < list.size(); i++) {
+				Integer element = list.get(i);
+
+				if (element != previous) {
+					duplicatesList.add(element);
+					previous = element;
+					counter.add(1);
+				} else {
+					counter.set(counter.size() - 1,
+							counter.get(counter.size() - 1) + 1);
+				}
+			}
+		} catch (IndexOutOfBoundsException e) {
+		} catch (NullPointerException e) {
+		}
+
+		return new List[] { duplicatesList, counter };
 	}
 
 	public List<Integer> sort(List<Integer> list) {
