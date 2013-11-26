@@ -6,38 +6,64 @@
 
 <h:head>
 	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="main.css" />
+	<h:outputStylesheet library="css" name="pure.css" />
 </h:head>
 
 <h:body>
-	<h:form>
-		<h:dataTable var="employee"
-			value="#{editedEmployeeBean.employeeAsList}">
-			<h:column>
-				<f:facet name="header">id</f:facet>
-				<h:outputText value="#{employee.id}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">firstName</f:facet>
-				<h:inputText value="#{employee.firstName}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">lastName</f:facet>
-				<h:inputText value="#{employee.lastName}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">salary</f:facet>
-				<h:inputText value="#{employee.salary}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header"></f:facet>
-				<h:commandLink value="Save" action="#{editedEmployeeBean.save()}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header"></f:facet>
-				<h:commandLink value="Cancel"
-					action="#{editedEmployeeBean.cancel()}" />
-			</h:column>
-		</h:dataTable>
-	</h:form>
+	<div class="content">
+		<div class="pure-g content-ribbon">
+			<div class="pure-u-1">
+				<h:form class="pure-form pure-form-stacked">
+					<div class="pure-g pure-table pure-table-head round-border">
+						<div class="pure-u-1-6 cell">
+							<h:outputText value="id" />
+						</div>
+						<div class="pure-u-1-6 cell">
+							<h:outputText value="firstName" />
+						</div>
+						<div class="pure-u-1-6 cell">
+							<h:outputText value="lastName" />
+						</div>
+						<div class="pure-u-1-6 cell">
+							<h:outputText value="salary" />
+						</div>
+						<div class="pure-u-1-6 cell">
+							<h:outputText value="" />
+						</div>
+						<div class="pure-u-1-6">
+							<h:outputText value="" />
+						</div>
+					</div>
+
+					<ui:repeat var="employee"
+						value="#{editedEmployeeBean.employeeAsList}">
+						<div class="pure-g pure-table pure-table-row round-border">
+							<div class="pure-u-1-6 cell">
+								<h:outputText value="#{employee.id}" />
+							</div>
+							<div class="pure-u-1-6 cell">
+								<h:inputText value="#{employee.firstName}" />
+							</div>
+							<div class="pure-u-1-6 cell">
+								<h:inputText value="#{employee.lastName}" />
+							</div>
+							<div class="pure-u-1-6 cell">
+								<h:inputText value="#{employee.salary}" />
+							</div>
+							<div class="pure-u-1-6 cell">
+								<h:commandLink value="Save"
+									action="#{editedEmployeeBean.save()}" />
+							</div>
+							<div class="pure-u-1-6">
+								<h:commandLink value="Cancel"
+									action="#{editedEmployeeBean.cancel()}" />
+							</div>
+						</div>
+					</ui:repeat>
+				</h:form>
+			</div>
+		</div>
+	</div>
 </h:body>
 </html>
