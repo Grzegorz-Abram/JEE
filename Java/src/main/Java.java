@@ -8,19 +8,45 @@ public class Java {
 
 	public static void main(String[] args) {
 		Java java = new Java();
-		List<Integer> list, sortedList;
-		List<Integer>[] duplicatesList;
 
-		list = java.generateIntList(20, 10);
-		sortedList = java.sort(list);
-		java.printIntList(sortedList);
+		for (int i = 0; i < 2; i++) {
+			AutoSortedArrayList list = new AutoSortedArrayList();
+			java.printIntList(list);
 
-		System.out.println();
+			if (i == 0) {
+				list.setAutoSorted(true);
+			} else {
+				list.setAutoSorted(false);
+			}
 
-		duplicatesList = java.countDuplicates(sortedList);
-		java.printIntList(duplicatesList[0]);
-		System.out.println();
-		java.printIntList(duplicatesList[1]);
+			list.add(7);
+			java.printIntList(list);
+			System.out.println();
+
+			list.add(2);
+			java.printIntList(list);
+			System.out.println();
+
+			list.add(5);
+			java.printIntList(list);
+			System.out.println();
+
+			list.add(3);
+			java.printIntList(list);
+			System.out.println();
+
+			list.add(4);
+			java.printIntList(list);
+			System.out.println();
+
+			list.add(9);
+			java.printIntList(list);
+			System.out.println();
+
+			list.add(1);
+			java.printIntList(list);
+			System.out.println();
+		}
 	}
 
 	public List<Integer>[] countDuplicates(List<Integer> list) {
